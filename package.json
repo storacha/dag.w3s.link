@@ -1,0 +1,41 @@
+{
+  "name": "dag.w3s.link",
+  "version": "0.0.0",
+  "description": "IPFS HTTP Gateway exposing the Graph API, and nothing else.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "npm run build:debug && miniflare dist/worker.mjs --watch --debug -m -e .env",
+    "build": "esbuild --bundle src/index.js --format=esm --sourcemap --minify --outfile=dist/worker.mjs",
+    "build:debug": "esbuild --bundle src/index.js --format=esm --outfile=dist/worker.mjs",
+    "test": "npm run build:debug && ava --verbose --node-arguments='--experimental-vm-modules'",
+    "lint": "standard"
+  },
+  "keywords": [
+    "IPFS",
+    "gateway",
+    "CAR",
+    "CID",
+    "IPLD",
+    "UnixFS"
+  ],
+  "author": "Alan Shaw",
+  "license": "Apache-2.0 OR MIT",
+  "dependencies": {
+    "@web3-storage/gateway-lib": "^3.1.1"
+  },
+  "devDependencies": {
+    "ava": "^5.2.0",
+    "esbuild": "^0.17.11",
+    "miniflare": "^2.9.0",
+    "multiformats": "^11.0.2",
+    "standard": "^17.0.0",
+    "uint8arrays": "^4.0.3"
+  },
+  "standard": {
+    "ignore": [
+      "*.ts"
+    ]
+  }
+}
