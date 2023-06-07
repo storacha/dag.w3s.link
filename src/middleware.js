@@ -1,3 +1,4 @@
+/* eslint-env worker */
 import { HttpError } from '@web3-storage/gateway-lib/util'
 
 /**
@@ -27,7 +28,7 @@ export function withDenylist (handler) {
 /**
  * Intercepts request if content cached by just returning cached response.
  * Otherwise proceeds to handler.
- * 
+ *
  * Note: Different from middleware provided by gateway-lib as this attempts to
  * caches everything, not just responses with a Content-Length, since we'll
  * never have a Content-Length set!
