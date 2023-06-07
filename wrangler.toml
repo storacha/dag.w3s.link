@@ -12,7 +12,7 @@ command = "npm run build:debug"
 # PROD!
 [env.production]
 account_id = "fffa4b4363a7e5250af8357087263b3a"
-route = { pattern = "https://dag.w3s.link/*", zone_id = "f2f8a5b1c557202c6e3d0ce0e98e4c8e" }
+route = { pattern = "https://dag.w3s.link/*", zone_id = "ae60d8f737317467ec666dc3851a6277" }
 
 [env.production.build]
 command = "npm run build"
@@ -24,7 +24,7 @@ DENYLIST_API_URL = "https://denylist.dag.haus"
 # Staging!
 [env.staging]
 account_id = "fffa4b4363a7e5250af8357087263b3a"
-route = { pattern = "https://dag-staging.w3s.link/*", zone_id = "f2f8a5b1c557202c6e3d0ce0e98e4c8e" }
+route = { pattern = "https://dag-staging.w3s.link/*", zone_id = "ae60d8f737317467ec666dc3851a6277" }
 
 [env.staging.build]
 command = "npm run build"
