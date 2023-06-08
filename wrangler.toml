@@ -1,0 +1,54 @@
+name = "dag-w3s-link"
+main = "./dist/worker.mjs"
+compatibility_date = "2022-10-03"
+compatibility_flags = [
+  "streams_enable_constructors",
+  "transformstream_enable_standard_constructor"
+]
+
+[build]
+command = "npm run build:debug"
+
+[vars]
+GATEWAY_URL = "http://freeway.dag.haus"
+DENYLIST_API_URL = "http://denylist.dag.haus"
+
+# PROD!
+[env.production]
+account_id = "fffa4b4363a7e5250af8357087263b3a"
+route = { pattern = "https://dag.w3s.link/*", zone_id = "ae60d8f737317467ec666dc3851a6277" }
+
+[env.production.build]
+command = "npm run build"
+
+[env.production.vars]
+GATEWAY_URL = "https://freeway.dag.haus"
+DENYLIST_API_URL = "https://denylist.dag.haus"
+
+# Staging!
+[env.staging]
+account_id = "fffa4b4363a7e5250af8357087263b3a"
+route = { pattern = "https://dag-staging.w3s.link/*", zone_id = "ae60d8f737317467ec666dc3851a6277" }
+
+[env.staging.build]
+command = "npm run build"
+
+[env.staging.vars]
+GATEWAY_URL = "https://freeway-staging.dag.haus"
+DENYLIST_API_URL = "https://denylist-staging.dag.haus"
+
+# Test!
+[env.test]
+workers_dev = true
+
+[env.test.vars]
+DEBUG = "true"
+
+# Developers! Developers! Developers!
+
+[env.alanshaw]
+workers_dev = true
+account_id = "4fe12d085474d33bdcfd8e9bed4d8f95"
+
+[env.alanshaw.vars]
+DEBUG = "true"
