@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npm run dev",
-    "dev": "npm run build:debug && miniflare dist/worker.mjs --watch --debug -m -e .env",
+    "dev": "npm run build:debug && miniflare dist/worker.mjs --watch --debug -m",
     "build": "esbuild --bundle src/index.js --format=esm --sourcemap --minify --outfile=dist/worker.mjs",
     "build:debug": "esbuild --bundle src/index.js --format=esm --outfile=dist/worker.mjs",
     "test": "npm run build:debug && ava --verbose --node-arguments='--experimental-vm-modules'",

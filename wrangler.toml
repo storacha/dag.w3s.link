@@ -9,6 +9,10 @@ compatibility_flags = [
 [build]
 command = "npm run build:debug"
 
+[vars]
+GATEWAY_URL = "http://freeway.dag.haus"
+DENYLIST_API_URL = "http://denylist.dag.haus"
+
 # PROD!
 [env.production]
 account_id = "fffa4b4363a7e5250af8357087263b3a"
