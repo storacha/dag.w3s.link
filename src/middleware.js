@@ -15,7 +15,15 @@ export function withDenylist (handler) {
       throw new Error('missing environment variable: GATEWAY_URL')
     }
 
-    const res = await fetch(new URL(`/${ctx.dataCid.toV1()}`, env.DENYLIST_API_URL))
+    const res = await fetch(new URL(`/${ctx.dataCid.toV1()}`, env.DENYLIST_API_URL), {
+      // Allow Cloudflare to cache the content, and set a big TTL
+      // https://developers.cloudflare.com/workers/runtime-apis/request#requestinitcfproperties
+      // @ts-expect-error
+      cf: {
+        cacheEverything: true,
+        cacheTtl: 120 // (1 hour) we almost never remove from the deny list...
+      }
+    })
     // successful response indicates it is on the deny list
     if (res.status === 200) {
       throw new HttpError('', { status: 410 })
