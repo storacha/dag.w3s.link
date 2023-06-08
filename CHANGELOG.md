@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/web3-storage/dag.w3s.link/compare/v1.0.0...v1.1.0) (2023-06-08)
+
+
+### Features
+
+* cache denylist responses ([4cc3e63](https://github.com/web3-storage/dag.w3s.link/commit/4cc3e636d95143846e41eb2ccd07e636b940fc5d))
+
 ## 1.0.0 (2023-06-08)
 
 
