@@ -18,11 +18,11 @@ export default {
   /** @type {import('@web3-storage/gateway-lib').Handler<import('@web3-storage/gateway-lib').Context, import('./bindings').Environment>} */
   fetch (request, env, ctx) {
     const middleware = composeMiddleware(
-      withCdnCache,
       withErrorHandler,
       withHttpGet,
       withParsedIpfsUrl,
-      withDenylist
+      withDenylist,
+      withCdnCache
     )
     return middleware(handler)(request, env, ctx)
   }
