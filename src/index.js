@@ -1,5 +1,6 @@
 /* eslint-env worker */
 import {
+  withContext,
   withErrorHandler,
   withHttpGet,
   withParsedIpfsUrl,
@@ -20,6 +21,7 @@ export default {
     const middleware = composeMiddleware(
       withErrorHandler,
       withHttpGet,
+      withContext,
       withParsedIpfsUrl,
       withDenylist,
       withCdnCache
