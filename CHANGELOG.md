@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/web3-storage/dag.w3s.link/compare/v1.1.1...v1.1.2) (2023-07-04)
+
+
+### Bug Fixes
+
+* use fresh context object per request ([#6](https://github.com/web3-storage/dag.w3s.link/issues/6)) ([a20140a](https://github.com/web3-storage/dag.w3s.link/commit/a20140a229f12d6b1eba584ce44cee42830f168a))
+
 ## [1.1.1](https://github.com/web3-storage/dag.w3s.link/compare/v1.1.0...v1.1.1) (2023-06-13)
 
 
