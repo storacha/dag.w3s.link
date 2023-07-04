@@ -23,7 +23,7 @@
   "author": "Alan Shaw",
   "license": "Apache-2.0 OR MIT",
   "dependencies": {
-    "@web3-storage/gateway-lib": "^3.2.3"
+    "@web3-storage/gateway-lib": "^3.2.4"
   },
   "devDependencies": {
     "ava": "^5.2.0",
