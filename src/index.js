@@ -42,6 +42,6 @@ async function handler (request, env, ctx) {
   if (!env.GATEWAY_URL) {
     throw new Error('missing environment variable: GATEWAY_URL')
   }
-  const url = new URL(`/ipfs/${dataCid}${path}${searchParams.size ? '?' : ''}${searchParams}`, env.GATEWAY_URL)
+  const url = new URL(`/ipfs/${dataCid}${path.split('/').map(encodeURIComponent).join('/')}${searchParams.size ? '?' : ''}${searchParams}`, env.GATEWAY_URL)
   return fetch(url, { headers: new Headers(request.headers) })
 }
