@@ -56,8 +56,16 @@ test.before(async t => {
   })
 })
 
-test('should proxy to gateway', async t => {
+test('should proxy CAR request to gateway', async t => {
   const res = await t.context.miniflare.dispatchFetch(`http://localhost:8787/ipfs/${fixture.root}?format=car`)
+  if (!res.ok) t.fail(`unexpected response: ${await res.text()}`)
+
+  const output = new Uint8Array(await res.arrayBuffer())
+  t.true(equals(fixture.data, output))
+})
+
+test('should proxy RAW request to gateway', async t => {
+  const res = await t.context.miniflare.dispatchFetch(`http://localhost:8787/ipfs/${fixture.root}?format=raw`)
   if (!res.ok) t.fail(`unexpected response: ${await res.text()}`)
 
   const output = new Uint8Array(await res.arrayBuffer())

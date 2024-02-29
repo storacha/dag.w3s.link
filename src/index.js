@@ -15,6 +15,11 @@ import { withDenylist, withCdnCache } from './middleware.js'
  * @typedef {import('@web3-storage/gateway-lib').DagulaContext} DagulaContext
  */
 
+const FormatMime = {
+  car: 'application/vnd.ipld.car',
+  raw: 'application/vnd.ipld.raw'
+}
+
 export default {
   /** @type {import('@web3-storage/gateway-lib').Handler<import('@web3-storage/gateway-lib').Context, import('./bindings').Environment>} */
   fetch (request, env, ctx) {
@@ -36,7 +41,10 @@ async function handler (request, env, ctx) {
   if (!searchParams) {
     throw new Error('missing URL search params')
   }
-  if (!(searchParams.get('format') === 'car' || request.headers.get('Accept')?.includes('application/vnd.ipld.car'))) {
+  const formatParam = searchParams.get('format') ?? ''
+  const acceptHeader = request.headers.get('Accept') ?? ''
+  const acceptable = formatParam in FormatMime || acceptHeader.includes(FormatMime.car) || acceptHeader.includes(FormatMime.raw)
+  if (!acceptable) {
     throw new HttpError('not acceptable', { status: 406 })
   }
   if (!env.GATEWAY_URL) {
