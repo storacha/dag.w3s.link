@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/web3-storage/dag.w3s.link/compare/v1.1.2...v1.1.3) (2023-08-22)
+
+
+### Bug Fixes
+
+* encode path components in proxy URL ([e3c9a31](https://github.com/web3-storage/dag.w3s.link/commit/e3c9a3146ed6d72e17f719426be32c459b4291f8))
+
 ## [1.1.2](https://github.com/web3-storage/dag.w3s.link/compare/v1.1.1...v1.1.2) (2023-07-04)
 
 
