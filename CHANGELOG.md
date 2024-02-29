@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/web3-storage/dag.w3s.link/compare/v1.1.3...v1.1.4) (2024-02-29)
+
+
+### Bug Fixes
+
+* allow raw block requests ([f8ce9e7](https://github.com/web3-storage/dag.w3s.link/commit/f8ce9e7df7ad573019c23d2d8f060c8356f725c8))
+
 ## [1.1.3](https://github.com/web3-storage/dag.w3s.link/compare/v1.1.2...v1.1.3) (2023-08-22)
 
 
