@@ -20,9 +20,18 @@ const fixture = {
 
 test.before(async t => {
   const gateway = http.createServer((req, res) => {
-    res.write(fixture.data)
-    res.end()
+    if (req.method === 'GET') {
+      res.write(fixture.data)
+      res.end()
+    } else if (req.method === 'POST') {
+      res.setHeader('X-Proxied-By', 'TestGateway')
+      res.end()
+    } else {
+      res.statusCode = 405
+      res.end('Method Not Allowed')
+    }
   })
+
   await new Promise(resolve => gateway.listen(resolve))
   t.context.gateway = gateway
 
@@ -85,4 +94,14 @@ test('should deny access to certain CIDs', async t => {
   const res = await t.context.miniflare.dispatchFetch(`http://localhost:8787/ipfs/${deniedCID}`)
   if (res.ok) t.fail(`unexpected response: ${await res.text()}`)
   t.is(res.status, 410)
+})
+
+test('should proxy POST requests to gateway', async t => {
+  const res = await t.context.miniflare.dispatchFetch('http://localhost:8787', {
+    method: 'POST',
+    body: JSON.stringify({ key: 'value' })
+  })
+
+  t.is(res.headers.get('X-Proxied-By'), 'TestGateway')
+  t.true(res.ok)
 })

@@ -7,7 +7,7 @@ import {
   composeMiddleware
 } from '@web3-storage/gateway-lib/middleware'
 import { HttpError } from '@web3-storage/gateway-lib/util'
-import { withDenylist, withCdnCache } from './middleware.js'
+import { withDenylist, withCdnCache, withPostProxy } from './middleware.js'
 
 /**
  * @typedef {import('./bindings').Environment} Environment
@@ -25,6 +25,7 @@ export default {
   fetch (request, env, ctx) {
     const middleware = composeMiddleware(
       withErrorHandler,
+      withPostProxy,
       withHttpGet,
       withContext,
       withParsedIpfsUrl,

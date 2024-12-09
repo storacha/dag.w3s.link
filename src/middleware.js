@@ -75,3 +75,22 @@ export function withCdnCache (handler) {
     return response
   }
 }
+
+/**
+ * Middleware to proxy all POST requests to the UCANTO Server defined in the environment.
+ *
+ * @type {import('@web3-storage/gateway-lib').Middleware<IpfsUrlContext, IpfsUrlContext, Environment>}
+ */
+export function withPostProxy (handler) {
+  return async (request, env, ctx) => {
+    if (request.method === 'POST') {
+      const originRequest = new Request(request)
+      const url = new URL(request.url)
+      const targetUrl = `${env.GATEWAY_URL}${url.pathname}`
+      const response = await fetch(targetUrl, originRequest)
+      return response
+    }
+
+    return handler(request, env, ctx)
+  }
+}
