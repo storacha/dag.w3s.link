@@ -2,7 +2,7 @@
 import {
   withContext,
   withErrorHandler,
-  withHttpGet,
+  createWithHttpMethod,
   withParsedIpfsUrl,
   composeMiddleware
 } from '@web3-storage/gateway-lib/middleware'
@@ -12,7 +12,6 @@ import { withDenylist, withCdnCache } from './middleware.js'
 /**
  * @typedef {import('./bindings').Environment} Environment
  * @typedef {import('@web3-storage/gateway-lib').IpfsUrlContext} IpfsUrlContext
- * @typedef {import('@web3-storage/gateway-lib').DagulaContext} DagulaContext
  */
 
 const FormatMime = {
@@ -25,7 +24,7 @@ export default {
   fetch (request, env, ctx) {
     const middleware = composeMiddleware(
       withErrorHandler,
-      withHttpGet,
+      createWithHttpMethod('GET', 'HEAD'),
       withContext,
       withParsedIpfsUrl,
       withDenylist,
@@ -51,5 +50,5 @@ async function handler (request, env, ctx) {
     throw new Error('missing environment variable: GATEWAY_URL')
   }
   const url = new URL(`/ipfs/${dataCid}${path.split('/').map(encodeURIComponent).join('/')}${searchParams.size ? '?' : ''}${searchParams}`, env.GATEWAY_URL)
-  return fetch(url, { headers: new Headers(request.headers) })
+  return fetch(url, { headers: new Headers(request.headers), method: request.method })
 }
