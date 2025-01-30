@@ -20,6 +20,10 @@ const fixture = {
 
 test.before(async t => {
   const gateway = http.createServer((req, res) => {
+    if (req.method === 'HEAD') {
+      res.setHeader('Content-Length', fixture.data.length)
+      return res.end()
+    }
     res.write(fixture.data)
     res.end()
   })
@@ -85,4 +89,21 @@ test('should deny access to certain CIDs', async t => {
   const res = await t.context.miniflare.dispatchFetch(`http://localhost:8787/ipfs/${deniedCID}`)
   if (res.ok) t.fail(`unexpected response: ${await res.text()}`)
   t.is(res.status, 410)
+})
+
+test('should allow HEAD request for RAW', async t => {
+  const res = await t.context.miniflare.dispatchFetch(`http://localhost:8787/ipfs/${fixture.root}?format=raw`, { method: 'HEAD' })
+  if (!res.ok) t.fail(`unexpected response: ${await res.text()}`)
+
+  const contentLength = parseInt(res.headers.get('content-length'))
+  t.is(contentLength, fixture.data.length)
+
+  const output = new Uint8Array(await res.arrayBuffer())
+  t.true(equals(new Uint8Array(), output))
+})
+
+test('should deny POST requests', async t => {
+  const res = await t.context.miniflare.dispatchFetch(`http://localhost:8787/ipfs/${deniedCID}`, { method: 'POST' })
+  if (res.ok) t.fail(`unexpected response: ${await res.text()}`)
+  t.is(res.status, 405)
 })
