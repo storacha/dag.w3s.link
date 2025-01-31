@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.0](https://github.com/storacha/dag.w3s.link/compare/v1.1.4...v1.2.0) (2025-01-31)
+
+
+### Features
+
+* allow HEAD requests ([#11](https://github.com/storacha/dag.w3s.link/issues/11)) ([5918131](https://github.com/storacha/dag.w3s.link/commit/5918131da2bb138d022b89557306fd179b2e960f))
+
+
+### Bug Fixes
+
+* perms for release please ([62925af](https://github.com/storacha/dag.w3s.link/commit/62925afe0ea0d1556fa0ea598183b03e1234f1f5))
+* upgrade wrangler action ([ff7bb42](https://github.com/storacha/dag.w3s.link/commit/ff7bb42db68b04862e79777f50b84452dcf26fa2))
+* upgrade wrangler action ([8001da7](https://github.com/storacha/dag.w3s.link/commit/8001da7f90f8aa92c2f9561b4139a471750d1376))
+
 ## [1.1.4](https://github.com/web3-storage/dag.w3s.link/compare/v1.1.3...v1.1.4) (2024-02-29)
 
 
